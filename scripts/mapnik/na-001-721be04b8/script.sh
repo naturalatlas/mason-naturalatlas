@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 MASON_NAME=mapnik
-MASON_VERSION=1cd28643a
+MASON_VERSION=na-001-721be04b8
 MASON_LIB_FILE=lib/libmapnik.${MASON_DYNLIB_SUFFIX}
+GIT_REF=${MASON_VERSION/na-001-/}
 
 . ${MASON_DIR}/mason.sh
 
@@ -10,7 +11,7 @@ function mason_load_source {
     export MASON_BUILD_PATH=${MASON_ROOT}/.build/mapnik-v${MASON_VERSION}
      if [[ ! -d ${MASON_BUILD_PATH} ]]; then
         git clone https://github.com/naturalatlas/mapnik ${MASON_BUILD_PATH}
-        (cd ${MASON_BUILD_PATH} && git checkout ${MASON_VERSION} && git submodule update --init)
+        (cd ${MASON_BUILD_PATH} && git checkout ${GIT_REF} && git submodule update --init)
     fi
 }
 
